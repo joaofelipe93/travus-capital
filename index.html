@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travus Capital – Alavancagem Patrimonial Imobiliária</title>
+<meta name="description" content="Construa seu patrimônio com imóveis que se pagam e ainda colocam dinheiro no seu bolso. Travus Capital – Alavancagem Patrimonial Inteligente.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+:root {
+  --primary: #1A1A2E;
+  --bg: #0F0F1A;
+  --bg-card: #1A1A2E;
+  --bg-section: #111122;
+  --gold: #E8C547;
+  --gold-accent: #D4AF37;
+  --gold-warm: #C9A84C;
+  --gold-light: rgba(232,197,71,.12);
+  --white: #FFFFFF;
+  --text: #FFFFFF;
+  --text-muted: rgba(255,255,255,.65);
+  --text-sub: rgba(255,255,255,.5);
+  --line: rgba(232,197,71,.15);
+  --gradient-gold: linear-gradient(135deg, #E8C547, #D4AF37, #C9A84C);
+  --gradient-cta: linear-gradient(135deg, #E8C547 0%, #D4AF37 100%);
+  --radius: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+  --shadow-card: 0 20px 50px rgba(0,0,0,.3);
+  --shadow-glow: 0 0 30px rgba(232,197,71,.2);
+  --shadow-btn: 0 8px 24px rgba(232,197,71,.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; letter-spacing: -1.5px; }
+
+.section-title { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+.section-subtitle { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 500; color: var(--text-muted); max-width: 620px; margin: 0 auto 60px; }
+.text-gold { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 36px; border-radius: var(--radius-pill); font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; border: none; position: relative; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+.btn-gold { background: var(--gradient-cta); color: #0F0F1A; box-shadow: var(--shadow-btn); }
+.btn-gold::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); animation: shine 2.4s infinite; }
+@keyframes shine { 0% { left: -100%; } 60% { left: 140%; } 100% { left: 140%; } }
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(232,197,71,.45); }
+.btn-outline { background: transparent; color: var(--gold); border: 1.5px solid var(--gold); }
+.btn-outline:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+/* NAVBAR */
+#navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(15,15,26,.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); transition: background .3s ease, box-shadow .3s ease; }
+#navbar.scrolled { background: rgba(15,15,26,.97); box-shadow: 0 4px 24px rgba(0,0,0,.4); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-logo img { height: 36px; width: auto; display: block; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a { font-family: 'Inter', sans-serif; font-weight: 500; font-size: .92rem; color: var(--text-muted); transition: color .2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { padding: 11px 24px; font-size: .9rem; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all .3s ease; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { display: none; flex-direction: column; gap: 0; background: rgba(15,15,26,.98); border-top: 1px solid var(--line); padding: 16px 24px 24px; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { padding: 14px 0; font-family: 'Inter', sans-serif; font-weight: 500; color: var(--text-muted); border-bottom: 1px solid rgba(255,255,255,.06); transition: color .2s; }
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-menu .btn { margin-top: 16px; text-align: center; justify-content: center; }
+
+/* HERO */
+#hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 120px 0 80px; background: var(--bg); }
+.hero-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.hero-bg-img { position: absolute; inset: 0; background: url('images/hero.webp') center center / cover no-repeat; opacity: .45; }
+.hero-bg-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(15,15,26,.85) 30%, rgba(15,15,26,.4) 100%); }
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); }
+.hero-orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(232,197,71,.08) 0%, transparent 70%); top: -100px; right: -150px; }
+.hero-orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(232,197,71,.05) 0%, transparent 70%); bottom: -50px; left: -100px; }
+.particles-container { position: absolute; inset: 0; }
+.particle { position: absolute; width: 3px; height: 3px; background: var(--gold); border-radius: 50%; opacity: 0; animation: float-particle linear infinite; }
+@keyframes float-particle { 0% { opacity: 0; transform: translateY(100vh) scale(0); } 10% { opacity: .6; } 90% { opacity: .3; } 100% { opacity: 0; transform: translateY(-10vh) scale(1); } }
+@keyframes fadeIn  { from { opacity: 0 } to { opacity: 1 } }
+@keyframes fadeOut { to   { opacity: 0 } }
+@keyframes slideUp { from { transform: translateY(14px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+.hero-content { position: relative; z-index: 2; text-align: center; max-width: 860px; margin: 0 auto; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--gold-light); border: 1px solid rgba(232,197,71,.3); border-radius: var(--radius-pill); padding: 8px 20px; font-family: 'Inter', sans-serif; font-size: .88rem; font-weight: 600; color: var(--gold); margin-bottom: 28px; }
+.hero-h1 { font-size: clamp(2.1rem, 5.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 24px; }
+.shimmer-text { background: linear-gradient(90deg, #E8C547, #fff8d6, #E8C547, #D4AF37); background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 3s linear infinite; }
+@keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 300% center; } }
+.hero-sub { font-size: clamp(.95rem, 2vw, 1.15rem); color: var(--text-muted); max-width: 640px; margin: 0 auto 40px; line-height: 1.75; }
+.hero-cta-wrap { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+.trust-pills { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.trust-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-pill); padding: 7px 16px; font-size: .82rem; font-weight: 500; color: var(--text-muted); }
+.trust-pill i { color: var(--gold); font-size: .75rem; }
+
+/* FADE UP */
+.fade-up { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.hero-content .fade-up:nth-child(1) { transition-delay: 0s; }
+.hero-content .fade-up:nth-child(2) { transition-delay: .2s; }
+.hero-content .fade-up:nth-child(3) { transition-delay: .4s; }
+.hero-content .fade-up:nth-child(4) { transition-delay: .6s; }
+.hero-content .fade-up:nth-child(5) { transition-delay: .8s; }
+
+section { padding: 100px 0; }
+.section-header { text-align: center; margin-bottom: 60px; }
+.section-header .section-subtitle { margin-bottom: 0; }
+
+/* O QUE É */
+#oquee { background: var(--bg-section); }
+.oquee-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.oquee-grid .card:nth-child(4) { grid-column: 1 / 2; }
+.oquee-grid .card:nth-child(5) { grid-column: 2 / 3; }
+
+/* Vídeo compacto dentro de #oquee */
+.oquee-video-wrap {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto 8px;
+}
+.card { background: var(--bg-card); border: 1px solid rgba(232,197,71,.1); border-radius: var(--radius-lg); padding: 32px 28px; box-shadow: var(--shadow-card); transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.card:hover { transform: translateY(-6px); border-color: rgba(232,197,71,.4); box-shadow: var(--shadow-card), var(--shadow-glow); }
+.card-icon { width: 52px; height: 52px; background: var(--gold-light); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.3rem; color: var(--gold); }
+.card h3 { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -.3px; }
+.card p { font-size: .9rem; color: var(--text-muted); line-height: 1.65; }
+
+/* METODOLOGIA */
+#metodologia { background: var(--bg); }
+.metodo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.metodo-card { background: var(--bg-card); border: 1px solid rgba(232,197,71,.1); border-radius: var(--radius-xl); padding: 36px 32px; box-shadow: var(--shadow-card); position: relative; overflow: hidden; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.metodo-card[style*="background-image"]::before { content: ''; position: absolute; inset: 0; background: rgba(10,10,20,.75); z-index: 0; }
+.metodo-card[style*="background-image"] .metodo-icon, .metodo-card[style*="background-image"] h3, .metodo-card[style*="background-image"] p { position: relative; z-index: 1; }
+.metodo-card[style*="background-image"] .metodo-num { z-index: 1; }
+.metodo-card:hover { transform: translateY(-6px); border-color: rgba(232,197,71,.4); box-shadow: var(--shadow-card), var(--shadow-glow); }
+.metodo-num { position: absolute; top: 16px; right: 24px; font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 5rem; line-height: 1; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: .18; letter-spacing: -3px; }
+.metodo-icon { width: 56px; height: 56px; background: var(--gold-light); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--gold); margin-bottom: 20px; }
+.metodo-card h3 { font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -.4px; }
+.metodo-card p { font-size: .95rem; color: var(--text-muted); line-height: 1.7; }
+
+/* PROJEÇÃO */
+#projecao { background: var(--bg-section); }
+.projecao-scroll { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: center; }
+.proj-card { background: var(--bg-card); border: 1px solid rgba(232,197,71,.12); border-radius: var(--radius-xl); padding: 40px 32px; text-align: center; box-shadow: var(--shadow-card); transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; display: flex; flex-direction: column; gap: 20px; }
+.proj-card:hover { transform: translateY(-6px); border-color: rgba(232,197,71,.35); box-shadow: var(--shadow-card), var(--shadow-glow); }
+.proj-card.featured { border-color: rgba(232,197,71,.5); box-shadow: var(--shadow-card), var(--shadow-glow); transform: scale(1.05); position: relative; }
+.proj-card.featured:hover { transform: scale(1.05) translateY(-6px); }
+.proj-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--gradient-cta); color: #0F0F1A; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .78rem; padding: 5px 16px; border-radius: var(--radius-pill); white-space: nowrap; }
+.proj-patrimonio { font-family: 'Poppins', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -1px; line-height: 1; }
+.proj-label { font-size: .78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); font-weight: 600; }
+.proj-divider { height: 1px; background: var(--line); margin: 4px 0; }
+.proj-stat-value { font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700; color: var(--white); }
+.proj-stat-label { font-size: .82rem; color: var(--text-sub); margin-top: 2px; }
+
+.proj-chart-wrap { background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-xl); padding: 40px 40px 36px; box-shadow: var(--shadow-card); }
+.proj-toggles { display: flex; gap: 10px; margin-bottom: 32px; flex-wrap: wrap; }
+.proj-toggle { padding: 10px 24px; border-radius: var(--radius-pill); border: 1.5px solid rgba(232,197,71,.25); background: transparent; color: var(--text-muted); font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .88rem; cursor: pointer; transition: all .2s ease; }
+.proj-toggle:hover { border-color: var(--gold); color: var(--gold); }
+.proj-toggle.active { background: var(--gradient-cta); border-color: transparent; color: #0F0F1A; }
+.proj-chart-box { position: relative; height: 340px; margin-bottom: 28px; }
+.proj-chart-box canvas { width: 100% !important; height: 100% !important; }
+.proj-legend-row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.proj-legend-item { display: flex; align-items: center; gap: 8px; font-family: 'Inter', sans-serif; font-size: .85rem; color: var(--text-muted); }
+.proj-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.proj-summary { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+.proj-sum-item { flex: 1; min-width: 140px; padding: 0 24px; }
+.proj-sum-item:first-child { padding-left: 0; }
+.proj-sum-item.proj-sum-cta { display: flex; align-items: center; justify-content: flex-end; min-width: 220px; }
+.proj-sum-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .8px; color: var(--text-sub); font-weight: 600; margin-bottom: 6px; }
+.proj-sum-val { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.35rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -.5px; }
+.proj-sum-val span { font-size: .8rem; font-weight: 500; color: var(--text-sub); -webkit-text-fill-color: var(--text-sub); }
+.proj-sum-divider { width: 1px; height: 48px; background: var(--line); flex-shrink: 0; }
+
+/* FORMULÁRIO */
+#contato { background: var(--bg-section); }
+.form-wrap { max-width: 640px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-xl); padding: 52px 48px; box-shadow: var(--shadow-card); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 8px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 600; color: var(--text-muted); }
+.form-group input, .form-group textarea { background: rgba(255,255,255,.04); border: 1.5px solid rgba(232,197,71,.15); border-radius: var(--radius); padding: 14px 18px; color: var(--white); font-family: 'Inter', sans-serif; font-size: .95rem; outline: none; transition: border-color .2s, box-shadow .2s; resize: vertical; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-sub); }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(232,197,71,.1); }
+.form-group textarea { min-height: 120px; }
+.form-submit { margin-top: 8px; }
+.form-submit .btn { width: 100%; justify-content: center; font-size: 1.05rem; }
+
+/* DEPOIMENTOS */
+#depoimentos { background: var(--bg-section); }
+.depo-stats-bar { display: flex; align-items: center; justify-content: center; gap: 0; background: var(--bg-card); border: 1px solid var(--line); border-radius: var(--radius-xl); padding: 28px 40px; margin-bottom: 56px; flex-wrap: wrap; }
+.depo-stat-item { flex: 1; min-width: 140px; text-align: center; padding: 0 32px; }
+.depo-stat-item + .depo-stat-item { border-left: 1px solid var(--line); }
+.depo-stat-num { font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 6px; }
+.depo-stat-label { font-size: .82rem; color: var(--text-sub); font-weight: 500; }
+.depo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.depo-card { background: var(--bg-card); border: 1px solid rgba(232,197,71,.1); border-radius: var(--radius-xl); padding: 36px 32px 32px; box-shadow: var(--shadow-card); display: flex; flex-direction: column; gap: 20px; position: relative; overflow: hidden; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.depo-card:hover { transform: translateY(-6px); border-color: rgba(232,197,71,.35); box-shadow: var(--shadow-card), var(--shadow-glow); }
+.depo-card::before { content: 'C'; position: absolute; top: -12px; right: 24px; font-family: 'Poppins', sans-serif; font-size: 9rem; font-weight: 900; line-height: 1; color: var(--gold); opacity: .07; pointer-events: none; }
+.depo-card-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.depo-stars { display: flex; gap: 3px; }
+.depo-stars i { color: var(--gold); font-size: .85rem; }
+.depo-tag { display: inline-flex; align-items: center; gap: 5px; background: var(--gold-light); border: 1px solid rgba(232,197,71,.25); border-radius: var(--radius-pill); padding: 4px 12px; font-size: .72rem; font-weight: 700; color: var(--gold); white-space: nowrap; }
+.depo-text { font-size: .97rem; color: var(--text-muted); line-height: 1.75; font-style: italic; flex: 1; }
+.depo-divider { height: 1px; background: var(--line); }
+.depo-author { display: flex; align-items: center; gap: 14px; }
+.depo-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; outline: 2px solid rgba(232,197,71,.35); outline-offset: 2px; flex-shrink: 0; display: block; }
+.depo-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: .95rem; line-height: 1.2; }
+.depo-role { font-size: .8rem; color: var(--text-sub); margin-top: 2px; }
+
+/* ESPECIALISTAS */
+#especialistas {
+  background: var(--bg);
+  padding: 110px 0;
+}
+.especialistas-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.especialistas-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--gold-light); border: 1px solid rgba(232,197,71,.3); border-radius: var(--radius-pill); padding: 7px 18px; font-size: .82rem; font-weight: 700; color: var(--gold); letter-spacing: .4px; margin-bottom: 24px; }
+.especialistas-text .section-title { margin-bottom: 20px; }
+.especialistas-desc { font-size: .97rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 28px; }
+.especialistas-lista { display: flex; flex-direction: column; gap: 13px; margin-bottom: 36px; }
+.especialistas-item { display: flex; align-items: center; gap: 12px; font-size: .93rem; color: var(--text-muted); }
+.especialistas-dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--gradient-gold); }
+.especialistas-img-wrap { position: relative; }
+.especialistas-img-glow { position: absolute; inset: -30px; background: radial-gradient(ellipse at 50% 60%, rgba(232,197,71,.14) 0%, transparent 68%); filter: blur(30px); pointer-events: none; z-index: 0; }
+.especialistas-img { position: relative; z-index: 1; width: 100%; border-radius: var(--radius-xl); display: block; filter: drop-shadow(0 30px 60px rgba(0,0,0,.5)); }
+@media (max-width: 767px) {
+  #especialistas { padding: 72px 0; }
+  .especialistas-inner { grid-template-columns: 1fr; gap: 40px; }
+  .especialistas-img-wrap { order: -1; }
+}
+
+/* CTA FINAL */
+#cta-final { background: var(--bg-section); position: relative; overflow: hidden; }
+.cta-final-box { position: relative; z-index: 2; background: var(--bg-card); border: 1px solid rgba(232,197,71,.3); border-radius: var(--radius-xl); padding: 72px 48px; text-align: center; box-shadow: var(--shadow-card), var(--shadow-glow); }
+.cta-final-box::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-xl); background: radial-gradient(ellipse at 50% 0%, rgba(232,197,71,.08) 0%, transparent 70%); pointer-events: none; }
+.cta-final-box h2 { font-size: clamp(1.7rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: 20px; }
+.cta-final-box p { font-size: 1.1rem; color: var(--text-muted); max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+
+/* FOOTER */
+footer { background: #0a0a14; border-top: 1px solid var(--line); padding: 64px 0 32px; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.footer-logo { margin-bottom: 16px; }
+.footer-logo img { height: 40px; width: auto; display: block; }
+.footer-about { font-size: .9rem; color: var(--text-sub); line-height: 1.7; margin-bottom: 20px; }
+.footer-contact p { display: flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--text-muted); margin-bottom: 10px; }
+.footer-contact p i { color: var(--gold); font-size: .9rem; width: 16px; }
+.footer-col h4 { font-family: 'Poppins', sans-serif; font-size: .95rem; font-weight: 700; color: var(--white); margin-bottom: 20px; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: .88rem; color: var(--text-sub); transition: color .2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-social { display: flex; gap: 12px; margin-top: 8px; }
+.social-link { width: 40px; height: 40px; border-radius: 50%; background: var(--gold-light); border: 1px solid rgba(232,197,71,.2); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: .9rem; transition: background .2s, border-color .2s, transform .2s; }
+.social-link:hover { background: var(--gold); color: #0F0F1A; transform: translateY(-2px); border-color: var(--gold); }
+.footer-bottom { padding-top: 32px; text-align: center; }
+.footer-disclaimer { font-size: .78rem; color: var(--text-sub); line-height: 1.6; max-width: 820px; margin: 0 auto 20px; }
+.footer-copy { font-size: .82rem; color: var(--text-sub); }
+.footer-copy span { color: var(--gold); }
+
+/* ═══════════════════════════════════
+   SEÇÃO VÍDEO — REDESENHADA
+═══════════════════════════════════ */
+
+#video {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  padding: 110px 0 120px;
+}
+
+/* Fundo atmosférico */
+#video::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse at center,
+    rgba(232,197,71,.06) 0%,
+    rgba(232,197,71,.02) 40%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid lines decorativos */
+#video::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(232,197,71,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,197,71,.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#video .container { position: relative; z-index: 1; }
+
+/* Header da seção */
+#video .video-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+#video .video-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-light);
+  border: 1px solid rgba(232,197,71,.3);
+  border-radius: var(--radius-pill);
+  padding: 7px 18px;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+#video .video-header .section-title {
+  margin-bottom: 14px;
+}
+
+#video .video-header .section-subtitle {
+  margin-bottom: 0;
+}
+
+/* Layout principal: player + sidebar */
+.video-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 36px;
+  align-items: start;
+  margin-bottom: 48px;
+}
+
+/* ── PLAYER WRAPPER ── */
+.video-player-wrap {
+  position: relative;
+}
+
+/* Glow dourado atrás do player */
+.video-glow {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(232,197,71,.18) 0%,
+    transparent 70%);
+  filter: blur(24px);
+  border-radius: 32px;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity .4s ease;
+}
+
+.video-player-wrap:hover .video-glow {
+  opacity: 1.4;
+}
+
+/* Frame cinematográfico */
+.video-cinema-frame {
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(232,197,71,.35);
+  box-shadow:
+    0 0 0 1px rgba(232,197,71,.08),
+    0 30px 80px rgba(0,0,0,.6),
+    0 0 60px rgba(232,197,71,.08);
+  background: #000;
+}
+
+/* Cantos dourados decorativos */
+.video-corner {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.video-corner::before,
+.video-corner::after {
+  content: '';
+  position: absolute;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.video-corner::before { width: 100%; height: 2.5px; top: 0; left: 0; }
+.video-corner::after  { width: 2.5px; height: 100%; top: 0; left: 0; }
+
+.video-corner.tl { top: 12px; left: 12px; }
+.video-corner.tr { top: 12px; right: 12px; transform: scaleX(-1); }
+.video-corner.bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+.video-corner.br { bottom: 12px; right: 12px; transform: scale(-1); }
+
+/* Badge ao vivo / destaque */
+.video-live-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(15,15,26,.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(232,197,71,.3);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.video-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #E8C547;
+  animation: blink-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes blink-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(232,197,71,.5); }
+  50% { opacity: .6; box-shadow: 0 0 0 4px rgba(232,197,71,.1); }
+}
+
+/* O próprio vídeo */
+.video-cinema-frame video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+/* Barra inferior do player com stats */
+.video-player-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(26,26,46,.95);
+  border-top: 1px solid rgba(232,197,71,.12);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.video-player-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: .8rem;
+  color: var(--text-muted);
+}
+
+.video-player-stat i {
+  color: var(--gold);
+  font-size: .85rem;
+}
+
+.video-player-stat strong {
+  color: var(--white);
+  font-weight: 600;
+}
+
+/* ── SIDEBAR DE CONTEÚDO ── */
+.video-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Cards de tópico */
+.video-topic-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(232,197,71,.1);
+  border-radius: var(--radius-lg);
+  padding: 24px 22px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.video-topic-card:hover,
+.video-topic-card.active {
+  border-color: rgba(232,197,71,.4);
+  box-shadow: var(--shadow-glow);
+  transform: translateX(4px);
+}
+
+.video-topic-card.active {
+  background: rgba(232,197,71,.05);
+  border-left: 3px solid var(--gold);
+  padding-left: 19px;
+}
+
+.video-topic-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--gold-light);
+  border: 1px solid rgba(232,197,71,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: .85rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.video-topic-body {}
+
+.video-topic-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: .97rem;
+  color: var(--white);
+  margin-bottom: 5px;
+  letter-spacing: -.2px;
+}
+
+.video-topic-desc {
+  font-size: .83rem;
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+/* CTA na sidebar */
+.video-sidebar-cta {
+  background: linear-gradient(135deg, rgba(232,197,71,.12) 0%, rgba(212,175,55,.06) 100%);
+  border: 1px solid rgba(232,197,71,.3);
+  border-radius: var(--radius-lg);
+  padding: 24px 22px;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.video-sidebar-cta p {
+  font-size: .88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.video-sidebar-cta .btn {
+  width: 100%;
+  justify-content: center;
+  font-size: .9rem;
+  padding: 13px 20px;
+}
+
+/* ── BARRA DE ESTATÍSTICAS ── */
+.video-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(232,197,71,.1);
+  border: 1px solid rgba(232,197,71,.15);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.video-strip-item {
+  background: var(--bg-card);
+  padding: 28px 24px;
+  text-align: center;
+  transition: background .25s ease;
+}
+
+.video-strip-item:hover {
+  background: rgba(232,197,71,.04);
+}
+
+.video-strip-icon {
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.video-strip-num {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -1px;
+}
+
+.video-strip-label {
+  font-size: .8rem;
+  color: var(--text-sub);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1023px) {
+  .video-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .video-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .video-sidebar-cta {
+    grid-column: 1 / -1;
+  }
+  .video-topic-card:hover,
+  .video-topic-card.active {
+    transform: translateX(0) translateY(-3px);
+  }
+  .video-stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  #video { padding: 72px 0 80px; }
+  .video-sidebar { grid-template-columns: 1fr; }
+  .video-player-footer { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .video-stats-strip { grid-template-columns: repeat(2, 1fr); }
+  .video-strip-item { padding: 20px 16px; }
+  .video-strip-num { font-size: 1.3rem; }
+  .video-corner { width: 20px; height: 20px; }
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* ── OTHER RESPONSIVE ── */
+@media (max-width: 767px) {
+  section { padding: 72px 0; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+  .hero-h1 { font-size: 2rem; }
+  .hero-sub { font-size: .92rem; }
+  .oquee-grid, .perfil-grid { grid-template-columns: 1fr; }
+  .oquee-grid .card:nth-child(4), .oquee-grid .card:nth-child(5) { grid-column: auto; }
+  .metodo-grid { grid-template-columns: 1fr; }
+  .projecao-scroll { grid-template-columns: repeat(3, 85vw); overflow-x: auto; padding-bottom: 12px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .proj-card { scroll-snap-align: center; }
+  .proj-card.featured { transform: none; }
+  .form-wrap { padding: 36px 24px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .cta-final-box { padding: 52px 24px; }
+  .depo-stats-bar { flex-direction: column; padding: 20px 16px; }
+  .depo-stat-item { padding: 12px 16px; min-width: unset; }
+  .depo-stat-item + .depo-stat-item { border-left: none; border-top: 1px solid var(--line); }
+  .depo-grid { grid-template-columns: 1fr; }
+  .proj-chart-wrap { padding: 28px 20px; }
+  .proj-chart-box { height: 260px; }
+  .proj-summary { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .proj-sum-item { padding: 0; min-width: unset; }
+  .proj-sum-item.proj-sum-cta { justify-content: flex-start; }
+  .proj-sum-divider { display: none; }
+  .trust-pills { gap: 8px; }
+  .trust-pill { font-size: .78rem; padding: 6px 12px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo"><img src="images/logo.png" alt="Travus Capital"></a>
+      <ul class="nav-links">
+        <li><a href="#oquee">Como Funciona</a></li>
+        <li><a href="#metodologia">Metodologia</a></li>
+        <li><a href="#projecao">Projeções</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <a href="#contato" class="btn btn-gold nav-cta">Falar com Especialista</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#oquee" class="mobile-link">Como Funciona</a>
+    <a href="#metodologia" class="mobile-link">Metodologia</a>
+    <a href="#projecao" class="mobile-link">Projeções</a>
+    <a href="#depoimentos" class="mobile-link">Depoimentos</a>
+    <a href="#contato" class="mobile-link">Contato</a>
+    <a href="#contato" class="btn btn-gold">Falar com Especialista</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-img"></div>
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="particles-container" id="particles"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge fade-up">
+        <i class="fas fa-home"></i> Alavancagem Patrimonial Inteligente — Invista pouco, receba todo mês
+      </div>
+      <h1 class="hero-h1 fade-up">
+        Construa seu patrimônio com imóveis que <span class="shimmer-text">se pagam sozinhos</span> e geram <span class="shimmer-text">renda extra para você.</span>
+      </h1>
+      <p class="hero-sub fade-up">
+        Na Travus Capital, ensinamos estratégias inteligentes para você gerar renda extra mensalmente, investindo pouco do seu próprio dinheiro.
+      </p>
+      <div class="hero-cta-wrap fade-up">
+        <a href="#contato" class="btn btn-gold">
+          <i class="fas fa-comments"></i> Fale com um especialista agora
+        </a>
+      </div>
+      <div class="trust-pills fade-up">
+        <span class="trust-pill"><i class="fas fa-check"></i> Entrada reduzida</span>
+        <span class="trust-pill"><i class="fas fa-check"></i> Imóvel que se paga sozinho</span>
+        <span class="trust-pill"><i class="fas fa-check"></i> Renda passiva garantida</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE É + VÍDEO COMPACTO -->
+<section id="oquee">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">O que é <span class="text-gold">Alavancagem Patrimonial?</span><br>E por que você deveria investir ainda em 2026?</h2>
+      <p class="section-subtitle">O tempo não espera. Seu dinheiro está trabalhando para você?</p>
+    </div>
+
+    <!-- Vídeo compacto centralizado -->
+    <div class="oquee-video-wrap fade-up">
+      <div class="video-glow"></div>
+      <div class="video-cinema-frame">
+        <span class="video-corner tl"></span>
+        <span class="video-corner tr"></span>
+        <span class="video-corner bl"></span>
+        <span class="video-corner br"></span>
+        <div class="video-live-badge">
+          <span class="video-live-dot"></span>
+          Método exclusivo Travus
+        </div>
+        <video controls playsinline poster="">
+          <source src="images/IMG_8603.webm" type="video/webm">
+        </video>
+
+      </div>
+    </div>
+
+    <!-- 3 cards -->
+    <div class="oquee-grid" style="margin-top: 40px;">
+      <div class="card fade-up">
+        <div class="card-icon"><i class="fas fa-coins"></i></div>
+        <h3>Comece investindo uma pequena parte</h3>
+        <p>Você não precisa ter o valor total à vista. A alavancagem usa capital estratégico para abrir portas de alto valor com uma fração do investimento.</p>
+      </div>
+      <div class="card fade-up">
+        <div class="card-icon"><i class="fas fa-arrow-trend-up"></i></div>
+        <h3>Transforme passivo em ativo gerador</h3>
+        <p>Transforme um passivo em um ativo que gera renda constante. Seu imóvel trabalha por você 24 horas por dia, todos os dias.</p>
+      </div>
+      <div class="card fade-up">
+        <div class="card-icon"><i class="fas fa-rocket"></i></div>
+        <h3>Quanto antes, mais rápido você chega lá</h3>
+        <p>Quanto antes começar, mais rápido você alcança sua liberdade financeira. Cada mês de atraso é patrimônio que você deixa de construir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METODOLOGIA -->
+<section id="metodologia">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Como funcionará sua <span class="text-gold">consultoria</span><br>com a Travus Capital</h2>
+      <p class="section-subtitle">Uma jornada estruturada com especialistas ao seu lado em 4 passos simples.</p>
+    </div>
+    <div class="metodo-grid">
+      <div class="metodo-card fade-up" style="background-image:url('images/invista20.webp');background-size:cover;background-position:center;">
+        <div class="metodo-num">01</div>
+        <div class="metodo-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+        <h3>Invista apenas 20% do valor do imóvel</h3>
+        <p>Com apenas uma pequena parte do valor, tenha em seu nome um imóvel utilizando capital de terceiros. Mais alavancagem, menos desembolso inicial.</p>
+      </div>
+      <div class="metodo-card fade-up" style="background-image:url('images/parcela80.webp');background-size:cover;background-position:center;">
+        <div class="metodo-num">02</div>
+        <div class="metodo-icon"><i class="fas fa-building"></i></div>
+        <h3>O aluguel cobre até 80% da sua parcela mensal</h3>
+        <p>O locatário paga a maior parte, enquanto você constrói patrimônio de forma inteligente. O imóvel literalmente se paga sozinho.</p>
+      </div>
+      <div class="metodo-card fade-up" style="background-image:url('images/reinvista.webp');background-size:cover;background-position:center;">
+        <div class="metodo-num">03</div>
+        <div class="metodo-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Reinvista os ganhos e escale seu patrimônio</h3>
+        <p>Use o fluxo do aluguel e a valorização para formar a entrada do próximo imóvel. Crie um ciclo virtuoso de crescimento patrimonial contínuo.</p>
+      </div>
+      <div class="metodo-card fade-up" style="background-image:url('images/rentabilidade.webp');background-size:cover;background-position:center;">
+        <div class="metodo-num">04</div>
+        <div class="metodo-icon"><i class="fas fa-shield-halved"></i></div>
+        <h3>Rentabilidade sólida e segura para seu futuro</h3>
+        <p>Transforme o imóvel em fonte de renda e conquiste crescimento sólido e protegido. Patrimônio real, tangível e que valoriza com o tempo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJEÇÃO -->
+<section id="projecao">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Veja como seu <span class="text-gold">patrimônio pode evoluir</span><br>com imóveis que se pagam sozinhos.</h2>
+      <p class="section-subtitle">Três cenários reais de crescimento patrimonial baseados em nossa metodologia.</p>
+    </div>
+    <div class="proj-chart-wrap fade-up">
+      <div class="proj-toggles">
+        <button class="proj-toggle active" data-scenario="0">Conservador</button>
+        <button class="proj-toggle" data-scenario="1">Moderado</button>
+        <button class="proj-toggle" data-scenario="2">Acelerado</button>
+      </div>
+      <div class="proj-chart-box">
+        <canvas id="projecaoChart"></canvas>
+      </div>
+      <div class="proj-legend-row">
+        <div class="proj-legend-item">
+          <span class="proj-legend-dot" style="background:var(--gold)"></span>
+          <span>Patrimônio acumulado</span>
+        </div>
+        <div class="proj-legend-item">
+          <span class="proj-legend-dot" style="background:#4ade80"></span>
+          <span>Renda mensal</span>
+        </div>
+        <div class="proj-legend-item">
+          <span class="proj-legend-dot" style="background:rgba(255,255,255,.35)"></span>
+          <span>Seu investimento mensal</span>
+        </div>
+      </div>
+      <div class="proj-summary">
+        <div class="proj-sum-item">
+          <div class="proj-sum-label">Patrimônio final</div>
+          <div class="proj-sum-val" id="sum-patrimonio">R$ 1.750.000</div>
+        </div>
+        <div class="proj-sum-divider"></div>
+        <div class="proj-sum-item">
+          <div class="proj-sum-label">Renda mensal estimada</div>
+          <div class="proj-sum-val" id="sum-renda">R$ 9.140<span>/mês</span></div>
+        </div>
+        <div class="proj-sum-divider"></div>
+        <div class="proj-sum-item">
+          <div class="proj-sum-label">Seu investimento mensal</div>
+          <div class="proj-sum-val" id="sum-invest">R$ 2.321<span>/mês</span></div>
+        </div>
+        <div class="proj-sum-divider"></div>
+        <div class="proj-sum-item proj-sum-cta">
+          <a href="#contato" class="btn btn-gold" style="font-size:.9rem;padding:13px 28px;">Receba seu plano personalizado <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section id="contato">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Comece sua Jornada com a <span class="text-gold">Travus Capital</span></h2>
+      <p class="section-subtitle">Preencha seus dados e nossa equipe vai montar uma simulação personalizada.</p>
+    </div>
+    <div class="form-wrap fade-up">
+      <form id="contact-form" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nome">Nome completo *</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone *</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+          </div>
+          <div class="form-group">
+            <label for="renda">Renda mensal aproximada</label>
+            <input type="text" id="renda" name="renda" placeholder="Ex: R$ 8.000">
+          </div>
+          <div class="form-group full">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre seus objetivos financeiros..."></textarea>
+          </div>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-gold">
+            <i class="fas fa-paper-plane"></i> Enviar minha solicitação
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Depoimentos Reais – <span class="text-gold">Resultados Concretos</span></h2>
+      <p class="section-subtitle">Veja o que nossos clientes dizem sobre a transformação que viveram.</p>
+    </div>
+    <div class="depo-stats-bar fade-up">
+      <div class="depo-stat-item"><div class="depo-stat-num">+300</div><div class="depo-stat-label">Famílias atendidas</div></div>
+      <div class="depo-stat-item"><div class="depo-stat-num">R$ 150M+</div><div class="depo-stat-label">Em patrimônio gerado</div></div>
+      <div class="depo-stat-item"><div class="depo-stat-num">98%</div><div class="depo-stat-label">Satisfação dos clientes</div></div>
+      <div class="depo-stat-item"><div class="depo-stat-num">4.9★</div><div class="depo-stat-label">Avaliação média</div></div>
+    </div>
+    <div class="depo-grid">
+      <div class="depo-card fade-up">
+        <div class="depo-card-top">
+          <div class="depo-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <span class="depo-tag"><i class="fas fa-building"></i> 1º Imóvel conquistado</span>
+        </div>
+        <p class="depo-text">"A Travus Capital mudou completamente a minha visão sobre investimentos. Com a metodologia deles, consegui meu primeiro imóvel com apenas 20% de entrada e hoje recebo aluguel todo mês que praticamente cobre toda a parcela."</p>
+        <div class="depo-divider"></div>
+        <div class="depo-author">
+          <img class="depo-avatar" src="images/avatar1.webp" alt="Karla A.">
+          <div><div class="depo-name">Kaleb Ali Fakih</div><div class="depo-role"><strong>Empresário</strong> · São Paulo, SP</div></div>
+        </div>
+      </div>
+      <div class="depo-card fade-up">
+        <div class="depo-card-top">
+          <div class="depo-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <span class="depo-tag"><i class="fas fa-chart-line"></i> 2º Imóvel em 6 meses</span>
+        </div>
+        <p class="depo-text">"A equipe da Travus Capital foi incrível — explicaram tudo de forma clara, sem termos técnicos confusos. Em menos de 6 meses, já estava com meu segundo imóvel no caminho. Recomendo de olhos fechados!"</p>
+        <div class="depo-divider"></div>
+        <div class="depo-author">
+          <img class="depo-avatar" src="images/avatar2.webp" alt="Eduardo S.">
+          <div><div class="depo-name">Edson Sadao</div><div class="depo-role"><strong>Empresário</strong> · São Paulo, SP</div></div>
+        </div>
+      </div>
+      <div class="depo-card fade-up">
+        <div class="depo-card-top">
+          <div class="depo-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <span class="depo-tag"><i class="fas fa-shield-halved"></i> Patrimônio crescendo</span>
+        </div>
+        <p class="depo-text">"Como engenheiro, sempre fui cético em relação a consultorias. Mas os números da Travus Capital falaram por si só. Eles montaram uma projeção personalizada e hoje vejo meu patrimônio crescendo de forma consistente."</p>
+        <div class="depo-divider"></div>
+        <div class="depo-author">
+          <img class="depo-avatar" src="images/avatar3.webp" alt="Rafael O.">
+          <div><div class="depo-name">Ronaldo</div><div class="depo-role"><strong>Engenheiro</strong> · Salvador, BA</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="container">
+    <div class="cta-final-box fade-up">
+      <h2>O futuro não se espera, <span class="text-gold">se constrói.</span><br>A sua jornada começa agora.</h2>
+      <p>Não adie mais o seu futuro. Cada mês que passa é um patrimônio que você deixa de construir. Nossa equipe está pronta para guiar você.</p>
+      <a href="#contato" class="btn btn-gold" style="font-size:1.1rem; padding:18px 44px;">
+        <i class="fas fa-building"></i> Comece a investir em imóveis que trabalham para você
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo"><img src="images/logo.png" alt="Travus Capital"></div>
+        <p class="footer-about">Hub de inteligência imobiliária especializado em alavancagem patrimonial. Transformamos renda em patrimônio real e duradouro.</p>
+        <div class="footer-contact">
+          <p><i class="fas fa-phone"></i> (11) 5217-1891</p>
+          <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a0acadb7a2b7ac83b7b1a2b5b6b0eda0acaeeda1b1">[email&#160;protected]</a></p>
+          <p><i class="fas fa-location-dot"></i> Rua Seridó, 340 – Petrópolis – CEP: 59020-010</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul class="footer-links">
+          <li><a href="#oquee">Como Funciona</a></li>
+          <li><a href="#metodologia">Nossa Metodologia</a></li>
+          <li><a href="#projecao">Projeções</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociais</h4>
+        <div class="footer-social">
+          <a href="https://instagram.com/travuscapital" target="_blank" rel="noopener" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/@TravusCapital" target="_blank" rel="noopener" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/5511521718912" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div style="margin-top:24px;">
+          <h4>Siga-nos</h4>
+          <p style="font-size:.85rem;color:var(--text-sub);margin-top:4px;">@travuscapital</p>
+          <p style="font-size:.85rem;color:var(--text-sub);">@TravusCapital</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-disclaimer">
+        A Travus Capital é uma empresa de consultoria em alavancagem patrimonial imobiliária. As informações contidas neste site são de caráter educativo e informativo, não constituindo promessa ou garantia de rentabilidade. Os valores apresentados são exemplos ilustrativos baseados em cenários de mercado e na metodologia proprietária da empresa. Investimentos imobiliários envolvem riscos, incluindo variação de mercado, vacância e flutuações nas taxas de juros. Rentabilidade passada não garante resultados futuros. Consulte sempre um especialista antes de tomar qualquer decisão financeira. © 2026 Travus Capital. Todos os direitos reservados.
+      </p>
+      <p class="footer-copy">© 2026 <span>Travus Capital</span>. Todos os direitos reservados. Desenvolvido com <i class="fas fa-heart" style="color:var(--gold);font-size:.7rem;"></i> para construir patrimônio.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5511521718912?text=Olá!%20Tenho%20interesse%20em%20saber%20mais%20sobre%20alavancagem%20patrimonial%20imobiliária." target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+(function() {
+  'use strict';
+
+  // PARTICLES
+  const container = document.getElementById('particles');
+  if (container) {
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.cssText = `left:${Math.random()*100}%;width:${Math.random()*3+2}px;height:${Math.random()*3+2}px;animation-duration:${Math.random()*12+8}s;animation-delay:${Math.random()*8}s;opacity:0;`;
+      container.appendChild(p);
+    }
+  }
+
+  // NAVBAR SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+
+  // HAMBURGER
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link, .mobile-menu .btn').forEach(el => {
+    el.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  // HERO FADE-UP
+  window.addEventListener('load', () => {
+    document.querySelectorAll('#hero .fade-up').forEach(el => el.classList.add('visible'));
+  });
+
+  // INTERSECTION OBSERVER
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up:not(#hero .fade-up)').forEach((el, i) => {
+      el.style.transitionDelay = (i % 4) * 0.12 + 's';
+      observer.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+  }
+
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const id = this.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // TELEFONE MASK
+  const telInput = document.getElementById('telefone');
+  if (telInput) {
+    telInput.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '').slice(0, 11);
+      this.value = v.length <= 10
+        ? v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3')
+        : v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    });
+  }
+
+  // RENDA MASK
+  const rendaInput = document.getElementById('renda');
+  if (rendaInput) {
+    rendaInput.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g, '');
+      if (v) v = (parseInt(v) / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      this.value = v;
+    });
+  }
+
+  // FORM SUBMIT + PIPERUN INTEGRATION
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nome  = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const tel   = document.getElementById('telefone').value.trim();
+      const renda = document.getElementById('renda').value.trim();
+
+      // Campos obrigatórios
+      if (!nome || !email || !tel) {
+        showPopup('Preencha os campos obrigatórios', 'Nome, e-mail e telefone são obrigatórios para continuar.');
+        return;
+      }
+
+      // Validação de e-mail
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showPopup('E-mail inválido', 'Por favor, insira um endereço de e-mail válido.');
+        return;
+      }
+
+      // Validação de telefone (mesmo padrão do script original)
+      const apenasNums = tel.replace(/\D/g, '');
+      const temCaractereInvalido = /[^0-9\s\-\(\)\+]/.test(tel);
+      const qtdCorreta = apenasNums.length >= 10 && apenasNums.length <= 13;
+
+      if (temCaractereInvalido) {
+        showPopup('Verifique o telefone', 'Use apenas números no campo de telefone.');
+        return;
+      }
+      if (!qtdCorreta) {
+        showPopup('Verifique o telefone', `Número incompleto — ${apenasNums.length} dígito(s) informado(s).\nIncluia DDD + número. Ex: 11 91234-5678`);
+        return;
+      }
+
+      // Envio
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+      enviarPipeRun(nome, email, tel, renda);
+
+      setTimeout(() => {
+        showToast('Mensagem enviada! Nossa equipe entrará em contato em breve.', 'success');
+        form.reset();
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar minha solicitação';
+      }, 1800);
+    });
+  }
+
+  function enviarPipeRun(nome, email, tel, renda) {
+    const endpoint = 'https://app.pipe.run/webservice/integradorJson?hash=a88f3831-00b6-4a4b-afd2-d8b1425a0db4';
+    const rules = { update: true, status: 'open', equal_pipeline: true, filter_status_update: 'open' };
+    const leads = [{ id: email, title: 'Lead LP Travus - ' + nome, name: nome, email: email, mobile_phone: tel, value: renda, notes: ['Renda mensal informada: ' + renda] }];
+    fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ rules, leads }) })
+      .then(r => r.json())
+      .then(d => console.log('PipeRun:', d))
+      .catch(err => console.error('Erro PipeRun:', err));
+  }
+
+  function showPopup(titulo, mensagem) {
+    const existing = document.getElementById('travus-popup');
+    if (existing) existing.remove();
+
+    const overlay = document.createElement('div');
+    overlay.id = 'travus-popup';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:99999;animation:fadeIn .2s ease;';
+
+    const box = document.createElement('div');
+    box.style.cssText = 'background:#1A1A2E;border:1px solid rgba(232,197,71,.25);border-radius:20px;padding:40px 32px 32px;max-width:360px;width:90%;text-align:center;font-family:Inter,sans-serif;box-shadow:0 24px 60px rgba(0,0,0,.6),0 0 40px rgba(232,197,71,.08);animation:slideUp .25s ease;';
+
+    const icone = document.createElement('div');
+    icone.innerHTML = '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E8C547" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r=".5" fill="#E8C547"/></svg>';
+    icone.style.cssText = 'margin-bottom:16px;';
+
+    const tit = document.createElement('p');
+    tit.textContent = titulo;
+    tit.style.cssText = 'margin:0 0 8px;color:#fff;font-size:16px;font-weight:700;font-family:Poppins,sans-serif;letter-spacing:-.3px;';
+
+    const msg = document.createElement('p');
+    msg.textContent = mensagem;
+    msg.style.cssText = 'color:rgba(255,255,255,.55);font-size:13px;line-height:1.65;margin:0 0 28px;white-space:pre-line;';
+
+    const btn = document.createElement('button');
+    btn.textContent = 'Corrigir';
+    btn.type = 'button';
+    btn.style.cssText = 'background:linear-gradient(135deg,#E8C547,#D4AF37);color:#0F0F1A;border:none;border-radius:999px;padding:12px 36px;font-size:14px;font-weight:700;font-family:Poppins,sans-serif;cursor:pointer;transition:opacity .15s;';
+    btn.onmouseenter = () => btn.style.opacity = '.85';
+    btn.onmouseleave = () => btn.style.opacity = '1';
+    btn.addEventListener('click', () => fecharPopup(overlay));
+
+    box.append(icone, tit, msg, btn);
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', e => { if (e.target === overlay) fecharPopup(overlay); });
+    const escHandler = e => { if (e.key === 'Escape') { fecharPopup(overlay); document.removeEventListener('keydown', escHandler); } };
+    document.addEventListener('keydown', escHandler);
+  }
+
+  function fecharPopup(overlay) {
+    overlay.style.animation = 'fadeOut .2s ease forwards';
+    setTimeout(() => overlay.remove(), 200);
+  }
+
+  function showToast(msg, type) {
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.style.cssText = `position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:${type==='success'?'#1a3a1a':'#3a1a1a'};border:1px solid ${type==='success'?'#4CAF50':'#f44336'};color:#fff;padding:16px 28px;border-radius:999px;font-family:Inter,sans-serif;font-size:.92rem;font-weight:500;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;transition:opacity .3s ease,transform .3s ease;max-width:90vw;text-align:center;`;
+    toast.textContent = msg;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    }));
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(20px)';
+      setTimeout(() => toast.remove(), 350);
+    }, 4000);
+  }
+
+  // VIDEO TOPIC CARDS — highlight on click
+  document.querySelectorAll('.video-topic-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.video-topic-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+
+  // AUTOPLAY VIDEO ON SCROLL INTO VIEW
+  const autoVideo = document.querySelector('.oquee-video-wrap video');
+  if (autoVideo) {
+    autoVideo.muted = true;
+    autoVideo.setAttribute('muted', '');
+    autoVideo.setAttribute('playsinline', '');
+
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          autoVideo.play().catch(() => {});
+        } else {
+          autoVideo.pause();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    videoObserver.observe(autoVideo);
+  }
+
+  // PROJEÇÃO CHART
+  const scenarios = [
+    { label: 'Conservador', patrimonio: [0,175000,385000,630000,910000,1090000,1280000,1460000,1600000,1680000,1750000], renda: [0,820,1820,3010,4340,5200,6110,6970,7640,8010,9140], invest: [0,2321,2321,2321,2321,2321,2321,2321,2321,2321,2321], sumPatrimonio: 'R$ 1.750.000', sumRenda: 'R$ 9.140', sumInvest: 'R$ 2.321' },
+    { label: 'Moderado', patrimonio: [0,280000,620000,1050000,1520000,1870000,2200000,2520000,2750000,2900000,3000000], renda: [0,1320,2940,5010,7250,8910,10500,12010,13100,13830,16080], invest: [0,3480,3480,3480,3480,3480,3480,3480,3480,3480,3480], sumPatrimonio: 'R$ 3.000.000', sumRenda: 'R$ 16.080', sumInvest: 'R$ 3.480' },
+    { label: 'Acelerado', patrimonio: [0,380000,840000,1420000,2060000,2540000,2980000,3380000,3660000,3860000,4000000], renda: [0,1790,3970,6710,9730,11990,14070,15960,17280,18220,21440], invest: [0,4640,4640,4640,4640,4640,4640,4640,4640,4640,4640], sumPatrimonio: 'R$ 4.000.000', sumRenda: 'R$ 21.440', sumInvest: 'R$ 4.640' }
+  ];
+  const years = ['Início','Ano 1','Ano 2','Ano 3','Ano 4','Ano 5','Ano 6','Ano 7','Ano 8','Ano 9','Ano 10'];
+
+  const ctx = document.getElementById('projecaoChart');
+  if (!ctx) return;
+
+  Chart.defaults.color = 'rgba(255,255,255,.5)';
+  Chart.defaults.font.family = 'Inter, sans-serif';
+
+  function buildDatasets(idx) {
+    const s = scenarios[idx];
+    return [
+      { label: 'Patrimônio (R$)', data: s.patrimonio, yAxisID: 'yLeft', borderColor: '#E8C547', backgroundColor: function(ctx) { const chart = ctx.chart; const { ctx: c, chartArea } = chart; if (!chartArea) return 'rgba(232,197,71,.08)'; const grad = c.createLinearGradient(0, chartArea.top, 0, chartArea.bottom); grad.addColorStop(0, 'rgba(232,197,71,.18)'); grad.addColorStop(1, 'rgba(232,197,71,.01)'); return grad; }, fill: true, tension: 0.45, borderWidth: 2.5, pointBackgroundColor: '#E8C547', pointBorderColor: '#0F0F1A', pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7 },
+      { label: 'Renda mensal (R$)', data: s.renda, yAxisID: 'yRight', borderColor: '#4ade80', backgroundColor: 'rgba(74,222,128,.06)', fill: true, tension: 0.45, borderWidth: 2, pointBackgroundColor: '#4ade80', pointBorderColor: '#0F0F1A', pointBorderWidth: 2, pointRadius: 4, pointHoverRadius: 6 },
+      { label: 'Investimento mensal (R$)', data: s.invest, yAxisID: 'yRight', borderColor: 'rgba(255,255,255,.3)', backgroundColor: 'rgba(255,255,255,.03)', fill: false, tension: 0, borderWidth: 1.5, borderDash: [6,4], pointRadius: 0, pointHoverRadius: 4, pointBackgroundColor: 'rgba(255,255,255,.5)' }
+    ];
+  }
+
+  const projecaoChart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: years, datasets: buildDatasets(0) },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: { backgroundColor: '#1A1A2E', borderColor: 'rgba(232,197,71,.3)', borderWidth: 1, titleColor: '#E8C547', bodyColor: 'rgba(255,255,255,.75)', padding: 14, titleFont: { family: 'Poppins', weight: '700', size: 13 }, bodyFont: { family: 'Inter', size: 12 },
+          callbacks: { title: items => items[0].label, label: item => { const v = item.raw; if (item.datasetIndex===0) return '  Patrimônio: R$ '+v.toLocaleString('pt-BR'); if (item.datasetIndex===1) return '  Renda: R$ '+v.toLocaleString('pt-BR')+'/mês'; return '  Investimento: R$ '+v.toLocaleString('pt-BR')+'/mês'; } }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,.05)', drawBorder: false }, ticks: { color: 'rgba(255,255,255,.45)', font: { size: 11 } }, border: { display: false } },
+        yLeft: { type: 'linear', position: 'left', grid: { color: 'rgba(255,255,255,.05)', drawBorder: false }, border: { display: false }, ticks: { color: '#E8C547', font: { size: 11 }, callback: v => v>=1000000?'R$ '+(v/1000000).toLocaleString('pt-BR',{minimumFractionDigits:1})+'M':v>=1000?'R$ '+(v/1000).toFixed(0)+'k':'R$ '+v } },
+        yRight: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, border: { display: false }, ticks: { color: 'rgba(74,222,128,.7)', font: { size: 11 }, callback: v => 'R$ '+v.toLocaleString('pt-BR')+'/mês' } }
+      },
+      animation: { duration: 700, easing: 'easeInOutQuart' }
+    }
+  });
+
+  function updateSummary(idx) {
+    const s = scenarios[idx];
+    document.getElementById('sum-patrimonio').innerHTML = s.sumPatrimonio;
+    document.getElementById('sum-renda').innerHTML = s.sumRenda + '<span>/mês</span>';
+    document.getElementById('sum-invest').innerHTML = s.sumInvest + '<span>/mês</span>';
+  }
+
+  document.querySelectorAll('.proj-toggle').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.proj-toggle').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const idx = parseInt(this.dataset.scenario);
+      projecaoChart.data.datasets = buildDatasets(idx);
+      projecaoChart.update();
+      updateSummary(idx);
+    });
+  });
+
+})();
+</script>
+<script async
+  src="https://uyvusucarhn7q2rqvwzcrq2x.agents.do-ai.run/static/chatbot/widget.js"
+  data-agent-id="b5c4e1f5-4270-11f1-b074-4e013e2ddde4"
+  data-chatbot-id="ehk9-d-tDyZJkSgNl0qzkH92ALMMtSau"
+  data-name="travus-agent Chatbot"
+  data-primary-color="#031B4E"
+  data-secondary-color="#E5E8ED"
+  data-button-background-color="#0061EB"
+  data-starting-message="Hello! How can I help you today?"
+  data-logo="/static/chatbot/icons/default-agent.svg">
+</script>
+</body>
+</html>
